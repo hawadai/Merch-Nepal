@@ -27,7 +27,7 @@ const AdminLogin = () => {
 
 
     return (
-        <div className="min-w-screen min-h-screen bg-[#ffffff] flex justify-center items-center">
+        <div className="min-w-screen min-h-screen bg-[#000000] flex justify-center items-center">
             <div className="w-[350px] text-[#73ff00] p-2">
                 <div className="bg-[#6f68d1]p-4 rounded-md">
                    <div className="h-[70px]flex justify-center items-center">
