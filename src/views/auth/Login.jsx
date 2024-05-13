@@ -32,11 +32,11 @@ const Login = () => {
 
 
           <div className='w-[350px] text-[#000000] p-2'>
-          <img className ='w-full h-full' src= "http://localhost:3000/images/logo.png" alt="image" />
+          <img className ='w-full h-full' src= "http://localhost:3000/images/logo.png" alt="" />
           <div className='w-[100%] bg-slate-700 h-[2px] '></div>
           <br />
                 <h2 className='text-xl mb-3 font-bold'>Welcome!</h2>
-                <p className='text-sm mb-3 font-medium font-semibold underline'>Sign In with your account</p>
+                <p className='text-sm mb-3 font-semibold underline'>Sign In with your account</p>
 
     <form onSubmit={submit}>
          
