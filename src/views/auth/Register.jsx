@@ -28,7 +28,7 @@ const Register = () => {
         <div class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="w-[350px] text-[#000000] p-2">
-            <h2 className="text-xl mb-3 font-bold ">Welcome</h2>
+            <h2 className="text-xl mb-3 font-bold ">Welcome!</h2>
             <p className="text-sm mb-3 font-semibold underline">
               Please register your account
             </p>
