@@ -104,7 +104,7 @@ const AdminDashboard = () => {
 
 
                 <div className='flex justify-between drop-shadow-xl items-center p-5 bg-[#e9feea] rounded-md gap-3'>
-                    <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
+                    <div className='flex flex-col justify-start items-start text-[#676161]'>
                         <h2 className='text-3xl font-bold'>10</h2>
                         <span className='text-md font-medium'>Sellers</span>
                     </div>
@@ -132,7 +132,7 @@ const AdminDashboard = () => {
         
         <div className='w-full flex flex-wrap mt-7'>
             <div className='w-full lg:w-7/12 lg:pr-3'>
-                <div className='w-full bg-[#616175] p-4 rounded-md'>
+                <div className='w-full bg-[#3a3a54] p-4 rounded-md drop-shadow-xl'>
             <Chart options={state.options} series={state.series} type='bar' height={350} />
                 </div>
             </div>
@@ -142,13 +142,13 @@ const AdminDashboard = () => {
             <div className='w-full bg-[#3e75b4] p-3 rounded-md text-[#d0d2d6]'>
                 <div className='flex justify-between  items-center'>
                     <h2 className='font-semibold text-lg text-[#d0d2d6] pb-3'>Recent Seller Message</h2>
-                    <Link className='font-semibold text-sm text-[#d0d2d6] hover:underline hover:font-semibold'>View All</Link>
+                    <Link className='font-semibold text-sm text-[#d0d2d6] hover:underline hover:font-semibold hover:text-[#000000]'>View All</Link>
                 </div>
 
         <div className='flex flex-col gap-2 pt-6 text-[#859fd4]'>
             <ol className='relative border-1 border-slate-600 ml-4'>
                 <li className='mb-3 ml-6'>
-                    <div className='flex absolute -left-5 shadow-lg justify-center items-center w-10 h-10 p-[6px] bg-[#2884e1] rounded-full z-10'>
+                    <div className='flex absolute -left-5 shadow-lg justify-center items-center w-10 h-10 p-[6px] bg-[#166a4b] rounded-full z-10'>
                     <img className='w-full rounded-full h-full shadow-lg' src="http://localhost:3000/images/admin.jpg" alt="" /></div>
                     <div className='p-3 bg-slate-800 rounded-lg border border-slate-600 shadow-sm'>
                     <div className='flex justify-between items-center mb-2'>
@@ -178,7 +178,7 @@ const AdminDashboard = () => {
 
 
                 <li className='mb-3 ml-6'>
-                    <div className='flex absolute -left-5 shadow-lg justify-center items-center w-10 h-10 p-[6px] bg-[#4c7fe2] rounded-full z-10'>
+                    <div className='flex absolute -left-5 shadow-lg justify-center items-center w-10 h-10 p-[6px] bg-[#57ff15] rounded-full z-10'>
                     <img className='w-full rounded-full h-full shadow-lg' src="http://localhost:3000/images/admin.jpg" alt="" /></div>
                     <div className='p-3 bg-slate-800 rounded-lg border border-slate-600 shadow-sm'>
                     <div className='flex justify-between items-center mb-2'>
@@ -203,13 +203,13 @@ const AdminDashboard = () => {
 
         <div className='w-full p-4 bg-[#2d884a] rounded-md mt-6'>
             <div className='flex justify-between items-center'>
-                <h2 className='font-semibold text-lg text-[#d0d2d6] pb-3 '>Recent Orders</h2>
-                <Link className='font-semibold text-sm text-[#d0d2d6] hover:underline hover:font-semibold'>View All</Link>
+                <h2 className='font-semibold text-lg text-[#ffbb00] pb-3 '>Recent Orders</h2>
+                <Link className='font-semibold text-sm text-[#ffbb00] hover:underline hover:font-semibold hover:text-[#000000]'>View All</Link>
                </div>
 
     <div className='relative overflow-x-auto'>
-    <table className='w-full text-sm text-left text-[#d0d2d6]'>
-        <thead className='text-sm text-[#d0d2d6] uppercase border-b border-slate-700'>
+    <table className='w-full text-sm text-left text-[#d3cdcd]'>
+        <thead className='text-sm text-[#ffbb00] uppercase border-b border-slate-700 font-semibold'>
         <tr>
             <th scope='col' className='py-3 px-4'>Order Id</th>
             <th scope='col' className='py-3 px-4'>Price</th>
@@ -226,7 +226,7 @@ const AdminDashboard = () => {
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>$454</td>
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Pending</td>
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Pending</td>
-                <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
+                <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap hover:underline hover:text-[#000000]'>
                     <Link>View</Link> </td>
             </tr> )
             }
