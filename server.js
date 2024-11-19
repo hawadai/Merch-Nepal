@@ -20,4 +20,4 @@ app.use('/api',require('./routes/authRoutes'))
 app.get('/',(req,res) => res.send('Hello Server'))
 const port = process.env.PORT
 dbConnect()
-app.listen(port, () => console.log(`Server is running on port ${port}`))
+app.listen(port, () => console.log(`Server is running on port ${port}`)) 
