@@ -54,7 +54,7 @@ const Login = () => {
           src="http://localhost:3000/images/logo2.png"
           alt=""
         />
-        <div className="w-[100%] bg-slate-700 h-[2px] "></div>
+        
         <br />
         <h2 className="text-xl mb-3 font-bold">Admin Panel</h2>
         <form onSubmit={submit}>

@@ -2,8 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { BeatLoader } from 'react-spinners';
+import { overrideStyle } from '../../utils/utils';
+import { seller_register } from '../../store/Reducers/authReducer';
 
 const Register = () => {
+
+  const dispatch = useDispatch();
+  const {loader} = useSelector(state=> state.auth);
+
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -19,7 +28,7 @@ const Register = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(seller_register(state));
   };
 
   return (
@@ -87,8 +96,10 @@ const Register = () => {
                 <label htmlFor="checkbox"> I agree to terms & conditions</label>
               </div>
 
-              <button className="bg-[#2b5f53] w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3">
-                Sign Up
+              <button disabled={loader ? true : false} className="bg-[#2b5f53] w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3">
+              {
+               loader ? <BeatLoader color='#fff' cssOverride={overrideStyle} /> : 'Sign Up'
+              } 
               </button>
 
               <div className="flex items-center mb-3 gap-3 justify-center">
