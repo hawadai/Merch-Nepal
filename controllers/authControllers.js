@@ -1,9 +1,9 @@
 const adminModel = require("../models/adminModel");
+const sellerModel = require("../models/sellerModel");
+const sellerCustomerModel = require("../models/chat/sellerCustomerModel");
 const { responseReturn } = require("../utiles/response");
 const bcrpty = require("bcrypt");
 const { createToken } = require("../utiles/tokenCreate");
-const sellerModel = require("../models/sellerModel");
-const sellerCustomerModel = require("../models/chat/sellerCustomerModel");
 
 class authControllers {
   admin_login = async (req, res) => {
@@ -33,6 +33,8 @@ class authControllers {
       responseReturn(res, 500, { error: error.message });
     }
   };
+  // End Method
+
   seller_login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -60,6 +62,8 @@ class authControllers {
       responseReturn(res, 500, { error: error.message });
     }
   };
+  // End Method
+
   seller_register = async (req, res) => {
     const { email, name, password } = req.body;
     try {
@@ -71,24 +75,25 @@ class authControllers {
           name,
           email,
           password: await bcrpty.hash(password, 10),
-          method: "manually",
+          method: "menualy",
           shopInfo: {},
         });
         await sellerCustomerModel.create({
           myId: seller.id,
         });
+
         const token = await createToken({ id: seller.id, role: seller.role });
         res.cookie("accessToken", token, {
           expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         });
+
         responseReturn(res, 201, { token, message: "Register Success" });
       }
     } catch (error) {
-      responseReturn(res, 500, {
-        error: "Server Error, Please try again later",
-      });
+      responseReturn(res, 500, { error: "Internal Server Error" });
     }
   };
+  // End Method
 
   getUser = async (req, res) => {
     const { id, role } = req;
@@ -98,14 +103,13 @@ class authControllers {
         const user = await adminModel.findById(id);
         responseReturn(res, 200, { userInfo: user });
       } else {
-        // console.log("Seller Info");
         const seller = await sellerModel.findById(id);
         responseReturn(res, 200, { userInfo: seller });
       }
     } catch (error) {
       responseReturn(res, 500, { error: "Internal Server Error" });
     }
-  };
+  }; // End getUser Method
 }
 
 module.exports = new authControllers();
