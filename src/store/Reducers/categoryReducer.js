@@ -1,67 +1,85 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "../../api/api"; 
+import api from "../../api/api";
 
 export const categoryAdd = createAsyncThunk(
-    'category/categoryAdd',
-    async({ name,image },{rejectWithValue, fulfillWithValue}) => {
-        
-        try {
-            const formData = new FormData()
-            formData.append('name', name)
-            formData.append('image', image)
-            const {data} = await api.post('/category-add',formData,{withCredentials: true}) 
-            console.log(data)
-            return fulfillWithValue(data)
-        } catch (error) {
-            // console.log(error.response.data)
-            return rejectWithValue(error.response.data)
-        }
+  "category/categoryAdd",
+  async ({ name, image }, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("image", image);
+      const { data } = await api.post("/category-add", formData, {
+        withCredentials: true,
+      });
+      // console.log(data)
+      return fulfillWithValue(data);
+    } catch (error) {
+      // console.log(error.response.data)
+      return rejectWithValue(error.response.data);
     }
-)
+  }
+);
 
-  
- 
+export const get_category = createAsyncThunk(
+  "category/get_category",
+  async (
+    { parPage, page, searchValue },
+    { rejectWithValue, fulfillWithValue }
+  ) => {
+    try {
+      const { data } = await api.get(
+        `/category-get?page=${page}&&searchValue=${searchValue}&&parPage=${parPage}`,
+        { withCredentials: true }
+      );
+      // console.log(data)
+      return fulfillWithValue(data);
+    } catch (error) {
+      // console.log(error.response.data)
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const categoryReducer = createSlice({
-    name: 'category',
-    initialState:{
-        successMessage :  '',
-        errorMessage : '',
-        loader: false,
-        categorys : [] 
+  name: "category",
+  initialState: {
+    successMessage: "",
+    errorMessage: "",
+    loader: false,
+    categories: [],
+    totalCategory: 0,
+  },
+  reducers: {
+    messageClear: (state, _) => {
+      state.errorMessage = "";
     },
-    reducers : {
-
-        messageClear : (state,_) => {
-            state.errorMessage = ""
-        }
-
-    },
-    extraReducers: (builder) => {
-        builder
-        // .addCase(admin_login.pending, (state, { payload }) => {
-        //     state.loader = true;
-        // })
-        // .addCase(admin_login.rejected, (state, { payload }) => {
-        //     state.loader = false;
-        //     state.errorMessage = payload.error
-        // }) 
-        .addCase(categoryAdd.pending, (state, { payload }) => {
-            state.loader = true;
-        })
-        .addCase(categoryAdd.rejected, (state, { payload }) => {
-            state.loader = false;
-            state.errorMessage = payload.error
-        }) 
-        // .addCase(admin_login.fulfilled, (state, { payload }) => {
-        //     state.loader = false;
-        //     state.successMessage = payload.message
-        //     state.token = payload.token
-        //     state.role = returnRole(payload.token)
-        // })
- 
-
-    }
-
-})
-export const {messageClear} = categoryReducer.actions
-export default categoryReducer.reducer
+  },
+  extraReducers: (builder) => {
+    builder
+      // .addCase(admin_login.pending, (state, { payload }) => {
+      //     state.loader = true;
+      // })
+      // .addCase(admin_login.rejected, (state, { payload }) => {
+      //     state.loader = false;
+      //     state.errorMessage = payload.error
+      // })
+      .addCase(categoryAdd.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(categoryAdd.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error;
+      })
+      .addCase(categoryAdd.fulfilled, (state, { payload }) => {
+        state.loader = false;
+        state.successMessage = payload.message;
+        state.categories = [...state.categories, payload.category];
+      })
+      .addCase(get_category.fulfilled, (state, { payload }) => {
+        state.totalCategory = payload.totalCategory;
+        state.categories = payload.categories;
+      });
+  },
+});
+export const { messageClear } = categoryReducer.actions;
+export default categoryReducer.reducer;

@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { IoMdCloseCircle, IoMdImages } from "react-icons/io";
 import { BeatLoader } from "react-spinners";
 import { overrideStyle } from "../../utils/utils";
-import { categoryAdd } from "../../store/Reducers/categoryReducer";
+import {
+  categoryAdd,
+  messageClear,
+  get_category
+} from '../../store/Reducers/categoryReducer';
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import Search from '../components/Search';
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { loader } = useSelector((state) => state.category);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [show, setShow] = useState(false);
-  const [perPage, setPerPage] = useState(5);
+  const [parPage, setParPage] = useState(5);
   const [imageShow, setImage] = useState("");
+  const { loader, successMessage, errorMessage } = useSelector(
+    (state) => state.category
+  );
   const [state, setState] = useState({
     name: "",
     image: "",
@@ -34,6 +42,30 @@ const Category = () => {
     e.preventDefault();
     dispatch(categoryAdd(state));
   };
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        image: "",
+      });
+      setImage("");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage, dispatch]);
+
+  useEffect(() => {
+    const obj = {
+        parPage: parseInt(parPage),
+        page: parseInt(currentPage),
+        searchValue
+    }
+    dispatch(get_category(obj))
+},[searchValue, currentPage,parPage])
 
   return (
     <div className="px-2 lg:px-7 pt-5">
@@ -50,21 +82,7 @@ const Category = () => {
       <div className="flex flex-wrap w-full">
         <div className="w-full lg:w-7/12">
           <div className="w-full p-4 bg-[#1d1a41] rounded-md">
-            <div className="flex justify-between items-center">
-              <select
-                onChange={(e) => setPerPage(parseInt(e.target.value))}
-                className="px-4 py-2 focus:border-indigo-500 outline-none bg-[#c8ff2d] border border-slate-700 rounded-md text-[#090a0b] font-semibold"
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-              </select>
-              <input
-                className="px-4 py-2 focus:border-indigo-500 outline-none bg-[#c8ff2d] border border-slate-700 rounded-md text-[#070809]"
-                type="text"
-                placeholder="search"
-              />
-            </div>
+          <Search setParPage={setParPage} setSearchValue={setSearchValue} searchValue={searchValue}  />
             <div className="relative overflow-x-auto">
               <table className="w-full text-sm text-left text-[#d0d2d6]">
                 <thead className="text-sm text-[#d0d2d6] uppercase border-b border-slate-700">
@@ -133,7 +151,7 @@ const Category = () => {
                 pageNumber={currentPage}
                 setPageNumber={setCurrentPage}
                 totalItem={50}
-                perPage={perPage}
+                parPage={parPage}
                 showItem={3}
               />
             </div>
