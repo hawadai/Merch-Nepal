@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { BeatLoader} from 'react-spinners';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { overrideStyle } from '../../utils/utils';
+import { seller_login,messageClear } from '../../store/Reducers/authReducer';
+
 
 const Login = () => {
+
+    const dispatch = useDispatch()
+    const {loader,errorMessage,successMessage} = useSelector(state=>state.auth)
 
     const [state, setState] = useState({ 
         email: "",
@@ -18,8 +27,19 @@ const Login = () => {
 
     const submit = (e) => {
         e.preventDefault()
-        console.log(state)
+        dispatch(seller_login(state))
     }
+    useEffect(() => {
+        if (successMessage) {
+            toast.success(successMessage)
+            dispatch(messageClear())  
+        }
+        if (errorMessage) {
+            toast.error(errorMessage)
+            dispatch(messageClear())
+        }
+        
+    },[successMessage, errorMessage])
 
     return (
         <div class="relative min-w-screen bg-gray-50 min-h-screen min-w-screen flex items-center justify-center">
@@ -52,7 +72,9 @@ const Login = () => {
         </div>
  
 
-        <button className='bg-[#2b5f53] w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3'>Sign In</button>
+        <button disabled={loader ? true : false} className='bg-[#2b5f53] w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3'>            {
+               loader ? <BeatLoader color='#fff' cssOverride={overrideStyle} /> : 'Sing In'
+            } </button>
 
         <div className='flex items-center mb-3 gap-3 justify-center'>
             <p>Don't Have an account ? <Link className='font-semibold hover:underline decoration-2' to="/register">Sign Up</Link> </p> 
