@@ -51,7 +51,7 @@ const Category = () => {
         image: "",
       });
       setImage("");
-    }
+    } 
     if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
@@ -65,7 +65,7 @@ const Category = () => {
         searchValue
     }
     dispatch(get_category(obj))
-},[searchValue, currentPage,parPage])
+},[searchValue, currentPage,parPage,dispatch])
 
   return (
     <div className="px-2 lg:px-7 pt-5">
