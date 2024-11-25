@@ -53,11 +53,15 @@ class categoryController{
  // end method
 
     get_category = async (req, res) => {
-       const {page,searchValue, parPage} = req.query
-       const skipPage = parseInt(parPage) * (parseInt(page) - 1)
-
+       const {page,searchValue, parPage} = req.query 
+ 
        try {
-        if (searchValue) {
+            let skipPage = ''
+            if (parPage && page) {
+                skipPage = parseInt(parPage) * (parseInt(page) - 1)
+            }
+
+        if (searchValue && page && parPage) {
             const categories = await categoryModel.find({
                 $text: { $search: searchValue }
             }).skip(skipPage).limit(parPage).sort({ createdAt: -1})
@@ -65,23 +69,34 @@ class categoryController{
                 $text: { $search: searchValue }
             }).countDocuments()
             responseReturn(res, 200,{categories,totalCategory})
-        } else {
+        } 
+        else if(searchValue === '' && page && parPage) {
 
             const categories = await categoryModel.find({ }).skip(skipPage).limit(parPage).sort({ createdAt: -1})
+            const totalCategory = await categoryModel.find({ }).countDocuments()
+            responseReturn(res, 200,{categories,totalCategory}) 
+        } 
+        
+        else {
+
+            const categories = await categoryModel.find({ }).sort({ createdAt: -1})
             const totalCategory = await categoryModel.find({ }).countDocuments()
             responseReturn(res, 200,{categories,totalCategory})
             
         }
         
        } catch (error) {
-        responseReturn(res, 500, { error: 'Internal Server Error' });
-  
+            console.log(error.message)
        }
 
 
     }
 
     // end method 
+
+
+
+
 }
  
 
