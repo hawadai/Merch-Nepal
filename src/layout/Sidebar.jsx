@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getNav } from "../navigation/index";
 import { IoLogOut } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = ({showSidebar, setShowSidebar}) => {
+
+  const dispatch = useDispatch()
+  const { role } = useSelector(state => state.auth)
   const { pathname } = useLocation();
   const [allNav, setAllNav] = useState([]);
   useEffect(() => {
-    const navs = getNav("admin");
+    const navs = getNav(role);
     setAllNav(navs);
-  }, []);
+  }, [role]);
   // console.log(allNav)
 
   return (

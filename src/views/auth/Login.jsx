@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { BeatLoader} from 'react-spinners';
 import toast from 'react-hot-toast';
@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { overrideStyle } from '../../utils/utils';
 import { seller_login,messageClear } from '../../store/Reducers/authReducer';
 
-
 const Login = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const {loader,errorMessage,successMessage} = useSelector(state=>state.auth)
 
     const [state, setState] = useState({ 
@@ -32,14 +32,15 @@ const Login = () => {
     useEffect(() => {
         if (successMessage) {
             toast.success(successMessage)
-            dispatch(messageClear())  
+            dispatch(messageClear())
+            navigate('/')   
         }
         if (errorMessage) {
             toast.error(errorMessage)
             dispatch(messageClear())
         }
         
-    },[successMessage, errorMessage])
+    },[successMessage, errorMessage, dispatch])
 
     return (
         <div class="relative min-w-screen bg-gray-50 min-h-screen min-w-screen flex items-center justify-center">
