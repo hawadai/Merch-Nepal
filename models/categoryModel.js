@@ -1,23 +1,25 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const categorySchema = new Schema({
+const categorySchema = new Schema(
+  {
     name: {
-        type: String,
-        required : true
+      type: String,
+      required: true,
     },
     image: {
-        type: String,
-        required : true
+      type: String,
+      required: true,
     },
     slug: {
-        type: String,
-        required : true
-    } 
-     
-}, {timestamps: true})
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 categorySchema.index({
-    name: 'text'
-})
+  name: "text",
+});
 
-module.exports = model('categories',categorySchema)
+module.exports = model("categories", categorySchema);
