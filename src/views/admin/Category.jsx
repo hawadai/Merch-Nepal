@@ -21,7 +21,7 @@ const Category = () => {
   const [show, setShow] = useState(false);
   const [parPage, setParPage] = useState(5);
   const [imageShow, setImage] = useState("");
-  const { loader, successMessage, errorMessage } = useSelector(
+  const { loader, successMessage, errorMessage,categories } = useSelector(
     (state) => state.category
   );
   const [state, setState] = useState({
@@ -103,21 +103,17 @@ const Category = () => {
                 </thead>
 
                 <tbody>
-                  {[1, 2, 3, 4, 5].map((d, i) => (
+                  {categories.map((d, i) => (
+                    
                     <tr key={i}>
-                      <td
-                        scope="row"
-                        className="py-1 px-4 font-medium whitespace-nowrap"
-                      >
-                        {d}
-                      </td>
+                      <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>{i+1}</td>
                       <td
                         scope="row"
                         className="py-1 px-4 font-medium whitespace-nowrap"
                       >
                         <img
                           className="w-[45px] h-[45]"
-                          src={`http://localhost:3000/images/categories/${d}.jpg`}
+                          src={d.image} 
                           alt="error"
                         />
                       </td>
@@ -125,7 +121,7 @@ const Category = () => {
                         scope="row"
                         className="py-1 px-4 font-medium whitespace-nowrap"
                       >
-                        Tshirt
+                      {d.name} 
                       </td>
 
                       <td

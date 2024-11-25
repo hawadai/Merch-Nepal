@@ -1,4 +1,5 @@
 import React from 'react';
+
 const Pending = () => {
     return (
         <div>
@@ -6,4 +7,5 @@ const Pending = () => {
         </div>
     );
 };
+
 export default Pending;

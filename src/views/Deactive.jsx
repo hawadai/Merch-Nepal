@@ -1,4 +1,5 @@
 import React from 'react';
+
 const Deactive = () => {
     return (
         <div>
@@ -6,4 +7,5 @@ const Deactive = () => {
         </div>
     );
 };
+
 export default Deactive;
