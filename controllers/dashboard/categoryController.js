@@ -24,7 +24,7 @@ class categoryController {
 
         try {
           const result = await cloudinary.uploader.upload(image.filepath, {
-            folder: "categories",
+            folder: "categorys",
           });
 
           if (result) {
@@ -59,7 +59,7 @@ class categoryController {
       }
 
       if (searchValue && page && parPage) {
-        const categories = await categoryModel
+        const categorys = await categoryModel
           .find({
             $text: { $search: searchValue },
           })
@@ -71,19 +71,19 @@ class categoryController {
             $text: { $search: searchValue },
           })
           .countDocuments();
-        responseReturn(res, 200, { categories, totalCategory });
+        responseReturn(res, 200, { categorys, totalCategory });
       } else if (searchValue === "" && page && parPage) {
-        const categories = await categoryModel
+        const categorys = await categoryModel
           .find({})
           .skip(skipPage)
           .limit(parPage)
           .sort({ createdAt: -1 });
         const totalCategory = await categoryModel.find({}).countDocuments();
-        responseReturn(res, 200, { categories, totalCategory });
+        responseReturn(res, 200, { categorys, totalCategory });
       } else {
-        const categories = await categoryModel.find({}).sort({ createdAt: -1 });
+        const categorys = await categoryModel.find({}).sort({ createdAt: -1 });
         const totalCategory = await categoryModel.find({}).countDocuments();
-        responseReturn(res, 200, { categories, totalCategory });
+        responseReturn(res, 200, { categorys, totalCategory });
       }
     } catch (error) {
       console.log(error.message);
