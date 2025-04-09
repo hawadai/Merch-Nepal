@@ -145,7 +145,7 @@ const AddProduct = () => {
 
   return (
     <div className="px-2 lg:px-7 pt-5">
-      <div className="w-full p-4 bg-[#6a5fdf] rounded-md">
+      <div className="w-full p-4 bg-[#1e1e22] rounded-md">
         <div className="flex justify-between items-center pb-4">
           <h1 className="text-[#d0d2d6] text-xl font-semibold">Add Product</h1>
           <Link

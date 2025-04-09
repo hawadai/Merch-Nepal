@@ -89,7 +89,7 @@ const Login = () => {
             <div className='w-[45%] bg-slate-700 h-[1px] '></div>
         </div>
 
-        <div className='flex justify-center items-center gap-3'>
+        {/* <div className='flex justify-center items-center gap-3'>
             <div className='w-[135px] h-[35px] flex rounded-lg bg-[#ffd553] shadow-md hover:bg-[#4285f4] shadow-indigo-700/50 justify-center cursor-pointer items-center overflow-hidden'>
             <span><FaGoogle /></span>
              </div>
@@ -98,7 +98,7 @@ const Login = () => {
             <span><FaFacebook /></span>
              </div>
 
-        </div>
+        </div> */}
         
 
 

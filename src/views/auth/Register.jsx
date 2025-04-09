@@ -140,13 +140,10 @@ const Register = () => {
 
           <div className="w-full flex justify-center items-center mb-3">
             <div className="w-[45%] bg-slate-700 h-[2px]"></div>
-            <div className="w-[10%] flex justify-center items-center">
-              <span className="pb-1 font-semibold">Or</span>
-            </div>
             <div className="w-[45%] bg-slate-700 h-[2px] "></div>
           </div>
 
-          <div className="flex justify-center items-center gap-3">
+          {/* <div className="flex justify-center items-center gap-3">
             <div className="w-[135px] h-[35px] flex rounded-lg bg-[#ffd553] shadow-md hover:bg-[#4285f4] shadow-indigo-700/50 justify-center cursor-pointer items-center overflow-hidden">
               <span>
                 <FaGoogle />
@@ -158,7 +155,7 @@ const Register = () => {
                 <FaFacebook />
               </span>
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
